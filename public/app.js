@@ -1,5 +1,16 @@
 const todosEl = document.getElementById("todos");
 
+const todosForm = document.getElementById("todos-form");
+todosForm.addEventListener("submit", appendTodo);
+
+function appendTodo(e) {
+  e.preventDefault();
+  console.log(e.target[0].value);
+  if (e.target[0].value !== "") {
+    appendTodo(e.target[0].value);
+  }
+  e.target[0].value = "";
+}
 
 function createEditBtn() {
   const editBtn = document.createElement("button");
@@ -24,11 +35,15 @@ function createParagraphTag(todoStr) {
   return todoStr;
 }
 
-function createTodo(todoStr, todos = todosEl) {
+function createTodo(todoStr) {
   const listEl = document.createElement("li");
   listEl.value = todoStr;
   listEl.appendChild(createParagraphTag(todoStr));
   listEl.appendChild(createEditBtn());
   listEl.appendChild(createDeleteBtn());
-  todos.appendChild(listEl);
+  return listEl;
+}
+
+function appendTodo(todo, todos = todosEl) {
+  todos.appendChild(createTodo(todo));
 }
