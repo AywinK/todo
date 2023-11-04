@@ -45,3 +45,14 @@ function createTodo(todoStr) {
 function appendTodo(todo, todos = todosEl) {
   todos.appendChild(createTodo(todo));
 }
+
+todosEl.addEventListener("click", (e) => {
+  console.log(e.target.value);
+
+  if (e.target.value === "delete") {
+    todosEl.removeChild(e.target.parentNode);
+  }
+  if (e.target.value === "edit") {
+    
+  }
+});
