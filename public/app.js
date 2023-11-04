@@ -35,7 +35,6 @@ function createParagraphTag(todoStr) {
 
 function createTodo(todoStr) {
   const listEl = document.createElement("li");
-  listEl.value = todoStr;
   listEl.appendChild(createParagraphTag(todoStr));
   listEl.appendChild(createEditBtn());
   listEl.appendChild(createDeleteBtn());
@@ -53,6 +52,6 @@ todosEl.addEventListener("click", (e) => {
     todosEl.removeChild(e.target.parentNode);
   }
   if (e.target.value === "edit") {
-    
+    console.log(e.target.parentNode.);
   }
 });
