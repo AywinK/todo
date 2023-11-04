@@ -1,16 +1,14 @@
 const todosEl = document.getElementById("todos");
 
 const todosForm = document.getElementById("todos-form");
-todosForm.addEventListener("submit", appendTodo);
-
-function appendTodo(e) {
+todosForm.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(e.target[0].value);
   if (e.target[0].value !== "") {
     appendTodo(e.target[0].value);
   }
   e.target[0].value = "";
-}
+});
 
 function createEditBtn() {
   const editBtn = document.createElement("button");
@@ -32,7 +30,7 @@ function createParagraphTag(todoStr) {
   const p = document.createElement("p");
   p.value = "todo";
   p.innerText = todoStr;
-  return todoStr;
+  return p;
 }
 
 function createTodo(todoStr) {
