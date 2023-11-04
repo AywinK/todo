@@ -57,6 +57,10 @@ todosEl.addEventListener("click", (e) => {
     inputEl.value = e.target.parentNode.firstChild.innerText;
     e.target.parentNode.replaceChild(inputEl, e.target.parentNode.firstChild);
   }
+  if (e.target.value==="todo") {
+    e.target.classList.toggle("done");
+    console.log(e.target);
+  }
 });
 
 todosEl.addEventListener("keyup", (e) => {
