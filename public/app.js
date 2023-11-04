@@ -55,10 +55,12 @@ todosEl.addEventListener("click", (e) => {
     const inputEl = document.createElement("input");
     inputEl.type = "text";
     inputEl.value = e.target.parentNode.firstChild.innerText;
-    inputEl.addEventListener("input", (e) => {
+    inputEl.addEventListener("blur", (e) => {
       console.log(e);
+      const val = e.target.value;
+      const updatedTodo = createParagraphTag(val);
+      e.target.parentNode.replaceChild(updatedTodo, e.target.parentNode.firstChild)
     });
     e.target.parentNode.replaceChild(inputEl, e.target.parentNode.firstChild);
-    console.log(e.target.parentNode.firstChild.innerText, e);
   }
 });
