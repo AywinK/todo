@@ -52,6 +52,13 @@ todosEl.addEventListener("click", (e) => {
     todosEl.removeChild(e.target.parentNode);
   }
   if (e.target.value === "edit") {
-    console.log(e.target.parentNode.);
+    const inputEl = document.createElement("input");
+    inputEl.type = "text";
+    inputEl.value = e.target.parentNode.firstChild.innerText;
+    inputEl.addEventListener("input", (e) => {
+      console.log(e);
+    });
+    e.target.parentNode.replaceChild(inputEl, e.target.parentNode.firstChild);
+    console.log(e.target.parentNode.firstChild.innerText, e);
   }
 });
