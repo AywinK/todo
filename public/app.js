@@ -1,57 +1,76 @@
-const todos = document.getElementById("todos");
-console.log(todos);
+const todosEl = document.getElementById("todos");
 
 const todosForm = document.getElementById("todos-form");
-todosForm.addEventListener("submit", appendTodo);
-
-function appendTodo(e) {
+todosForm.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(e.target[0].value);
   if (e.target[0].value !== "") {
-    addTodo(e.target[0].value);
+    appendTodo(e.target[0].value);
   }
   e.target[0].value = "";
-}
+});
 
-function addTodo(todoStr) {
-  const todo = document.createElement("li");
-  todo.textContent = todoStr;
-  todo.appendChild(addEditBtn(todoStr));
-  todos.appendChild(todo);
-}
-
-function addEditBtn(todoStr) {
+function createEditBtn() {
   const editBtn = document.createElement("button");
-  editBtn.value = todoStr;
-  editBtn.setAttribute("type", "button");
-  editBtn.textContent = "Edit";
+  editBtn.type = "button";
+  editBtn.value = "edit";
+  editBtn.innerText = "Edit";
   return editBtn;
 }
 
-todos.addEventListener("click", (e) => {
-  console.log(e.target.type);
-  if (e.target.type === "button") {
-    console.log(e.target.value);
-    const updatedTodoVal = prompt(`Enter updated todo for "${e.target.value}"`);
-    const editBtns = document.querySelectorAll('button[type="button"]');
-    for (let i = 0; i < editBtns.length; i++) {
-      if (editBtns[i].value === e.target.value) {
-        editBtns[i].value = updatedTodoVal;
-      }
-    }
-    const listElsArr = document.querySelectorAll("li");
-    console.log(listElsArr[0]);
-    for (let i = 0; i < listElsArr.length; i++) {
-      console.log(listElsArr[i]);
-      if (listElsArr[i].value === e.target.value) {
-        listElsArr[i].value = updatedTodoVal;
-        listElsArr[i].innerText = updatedTodoVal;
-      }
-    }
-    console.log(editBtns);
+function createDeleteBtn() {
+  const delBtn = document.createElement("button");
+  delBtn.type = "button";
+  delBtn.value = "delete";
+  delBtn.innerText = "Delete";
+  return delBtn;
+}
+
+function createParagraphTag(todoStr) {
+  const p = document.createElement("p");
+  p.value = "todo";
+  p.innerText = todoStr;
+  return p;
+}
+
+function createTodo(todoStr) {
+  const listEl = document.createElement("li");
+  listEl.appendChild(createParagraphTag(todoStr));
+  listEl.appendChild(createEditBtn());
+  listEl.appendChild(createDeleteBtn());
+  return listEl;
+}
+
+function appendTodo(todo, todos = todosEl) {
+  todos.appendChild(createTodo(todo));
+}
+
+todosEl.addEventListener("click", (e) => {
+  console.log(e.target.value);
+
+  if (e.target.value === "delete") {
+    todosEl.removeChild(e.target.parentNode);
+  }
+  if (e.target.value === "edit") {
+    const inputEl = document.createElement("input");
+    inputEl.type = "text";
+    inputEl.value = e.target.parentNode.firstChild.innerText;
+    e.target.parentNode.replaceChild(inputEl, e.target.parentNode.firstChild);
+  }
+  if (e.target.value==="todo") {
+    e.target.classList.toggle("done");
+    console.log(e.target);
   }
 });
 
-for (let i = 0; i <= 10; i++) {
-  addTodo(i);
-}
+todosEl.addEventListener("keyup", (e) => {
+  console.log(e);
+  const val = e.target.value;
+  if (val && e.key === "Enter") {
+    const updatedTodo = createParagraphTag(val);
+    e.target.parentNode.replaceChild(
+      updatedTodo,
+      e.target.parentNode.firstChild
+    );
+  }
+});
