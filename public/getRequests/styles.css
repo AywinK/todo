@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #333333;
+  color: lightgrey;
+}
+
+#penguin {
+  border-radius: 50px;
+  /* background-color: #333999; */
+  display: flex;
+  text-align: center;
+  > * {
+    align-self: center;
+    justify-self: center;
+  }
+}
