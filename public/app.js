@@ -96,3 +96,19 @@ todosEl.addEventListener("keyup", (e) => {
 });
 
 
+document.addEventListener("paste", e => {
+  e.preventDefault();
+  const dataArr = e.clipboardData.getData("text");
+  const joinedArr = [];
+  let str = "";
+  for (data of dataArr) {
+    console.log(/\s/.test(data))
+    if (/\s/.test(data)) {
+      joinedArr.push(str);
+      str = "";
+    } else {
+      str += data
+    }
+  }
+  console.log(joinedArr);
+})
